@@ -171,6 +171,7 @@ Enable "Stream CSV" in the Settings menu to continuously log Wi-Fi data to a tim
 
 ```
 Copyright 2020 nolze
+Copyright 2026 David Klein (soinkleined)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
