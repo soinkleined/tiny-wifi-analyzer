@@ -8,7 +8,11 @@ Made with PyObjC, pywebview, ApexCharts, and PyInstaller.
 
 Forked from [nolze/tiny-wifi-analyzer](https://github.com/nolze/tiny-wifi-analyzer)
 
-![screenshot](img/twa_light.png)
+### Light Mode
+![Tiny Wi-Fi Analyzer - Light Mode](img/twa_light.png)
+
+### Dark Mode
+![Tiny Wi-Fi Analyzer - Dark Mode](img/twa_dark.png)
 
 ## Features
 
@@ -48,16 +52,15 @@ Because the application is not code-signed, you will need to follow these steps 
 
 On macOS 14 Sonoma and later, you must grant Location Services permission for the app to display Wi-Fi SSIDs:
 
-1. The app will prompt for permission on first launch
+1. **Grant permission on first launch** - The app will display this prompt:
 
-   ![Location Services Prompt](img/use_location_services_prompt.png)
+   ![Location Services Permission Prompt](img/use_location_services_prompt.png)
 
-2. If you need to enable it later, go to **System Settings > Privacy & Security > Location Services**
-3. Find "Tiny Wi-Fi Analyzer" and enable it
+2. **Enable manually if needed** - Go to **System Settings > Privacy & Security > Location Services**, find "Tiny Wi-Fi Analyzer" and enable it:
 
-   ![Location Services Toggle](img/use_location_services_toggle.png)
+   ![Location Services Settings Toggle](img/use_location_services_toggle.png)
 
-4. Restart the app
+3. **Restart the app** after granting permission
 
 ## Todos
 
