@@ -1,22 +1,26 @@
 [tool.poetry]
 name = "tiny-wifi-analyzer"
-version = "0.6.1"
-description = "A tiny Wi-Fi analyzer for macOS"
-authors = ["nolze <nolze@int3.net>"]
+version = "0.7.0"
+description = "A tiny Wi-Fi analyzer for macOS with enhanced features"
+authors = ["David Klein <david@soinkleined.com>", "nolze <nolze@int3.net>"]
 license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/soinkleined/tiny-wifi-analyzer"
+repository = "https://github.com/soinkleined/tiny-wifi-analyzer"
+keywords = ["wifi", "analyzer", "macos", "network", "scanner"]
 
 [tool.poetry.dependencies]
-python = "<3.14,>=3.9"
-pywebview = "~5"
-pyobjc-core = "~11.0"
-pyobjc-framework-cocoa = "~11.0"
-pyobjc-framework-CoreWLAN = "~11.0"
-pyobjc-framework-WebKit = "~11.0"
-pyobjc-framework-corelocation = "~11.0"
+python = ">=3.10,<3.14"
+pywebview = "^6.0"
+pyobjc-core = "^12.1"
+pyobjc-framework-cocoa = "^12.1"
+pyobjc-framework-CoreWLAN = "^12.1"
+pyobjc-framework-WebKit = "^12.1"
+pyobjc-framework-corelocation = "^12.1"
 
 [tool.poetry.group.dev.dependencies]
 pyinstaller = "^6"
-pytest = "^8.0.0"
+pytest = "^9.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

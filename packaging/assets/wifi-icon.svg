@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0080FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00D4FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.6" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="url(#bgGrad)"/>
+  
+  <!-- Wi-Fi waves -->
+  <g fill="none" stroke="url(#waveGrad)" stroke-linecap="round">
+    <!-- Outer wave -->
+    <path d="M 120 200 Q 256 80 392 200" stroke-width="24" opacity="0.5"/>
+    <!-- Middle wave -->
+    <path d="M 160 240 Q 256 160 352 240" stroke-width="24" opacity="0.7"/>
+    <!-- Inner wave -->
+    <path d="M 200 280 Q 256 240 312 280" stroke-width="24" opacity="0.9"/>
+  </g>
+  
+  <!-- Center dot -->
+  <circle cx="256" cy="320" r="28" fill="white"/>
+  
+  <!-- Chart bars at bottom -->
+  <g fill="white" opacity="0.8">
+    <rect x="140" y="380" width="40" height="60" rx="4"/>
+    <rect x="200" y="360" width="40" height="80" rx="4"/>
+    <rect x="260" y="340" width="40" height="100" rx="4"/>
+    <rect x="320" y="370" width="40" height="70" rx="4"/>
+  </g>
+</svg>

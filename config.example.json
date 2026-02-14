@@ -1,0 +1,11 @@
+{
+  "scan_interval_ms": 3000,
+  "update_interval_s": 0.3,
+  "debug": false,
+  "log_level": "WARNING",
+  "dark_mode": "auto",
+  "show_24ghz": true,
+  "show_5ghz": true,
+  "show_6ghz": true,
+  "layout": "stacked"
+}

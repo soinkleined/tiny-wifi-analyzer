@@ -18,6 +18,33 @@
         padding-bottom: 10px;
         padding-left: 10px;
         padding-right: 20px;
+        background-color: white;
+        color: black;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      body.dark-mode {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+      }
+
+      #charts {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      #charts.side-by-side {
+        flex-direction: row;
+        gap: 10px;
+      }
+
+      #charts.side-by-side .chart-container {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      #charts.stacked {
+        flex-direction: column;
       }
 
       .chart-container {
@@ -66,17 +93,174 @@
         box-sizing: border-box;
       }
 
+      body.dark-mode .chart-container.full-window {
+        background-color: #1a1a1a;
+      }
+
       .noscroll {
         overflow: hidden;
+      }
+
+      #band-controls {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin: 10px auto;
+        width: fit-content;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 10000;
+        font-size: 13px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+
+      #settings-menu {
+        position: relative;
+        display: inline-block;
+      }
+
+      #settings-button {
+        background: none;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 4px 8px;
+        cursor: pointer;
+        font-size: 13px;
+      }
+
+      #settings-button:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      #settings-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 4px;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        min-width: 200px;
+        z-index: 10001;
+      }
+
+      #settings-dropdown.open {
+        display: block;
+      }
+
+      .settings-item {
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .settings-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .settings-item label {
+        font-size: 12px;
+      }
+
+      .settings-item input[type="checkbox"] {
+        cursor: pointer;
+      }
+
+      .settings-item input[type="number"] {
+        width: 60px;
+        padding: 2px 4px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        font-size: 12px;
+      }
+
+      body.dark-mode #settings-button {
+        border-color: #555;
+        color: #e0e0e0;
+      }
+
+      body.dark-mode #settings-button:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      body.dark-mode #settings-dropdown {
+        background: #2a2a2a;
+        border-color: #555;
+        color: #e0e0e0;
+      }
+
+      body.dark-mode .settings-item input[type="number"] {
+        background: #1a1a1a;
+        border-color: #555;
+        color: #e0e0e0;
+      }
+
+      body.dark-mode #band-controls {
+        background: rgba(40, 40, 40, 0.95);
+        border-color: #555;
+        color: #e0e0e0;
+      }
+
+      #band-controls label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        white-space: nowrap;
+      }
+
+      #band-controls input[type="checkbox"] {
+        margin-right: 6px;
+        cursor: pointer;
       }
     </style>
   </head>
 
   <body>
-    <div id="charts" style="display: flex; flex-wrap: wrap">
-      <div class="chart-container"><div class="chart" id="chart24"></div></div>
-      <div class="chart-container"><div class="chart" id="chart5"></div></div>
-      <div class="chart-container"><div class="chart" id="chart6"></div></div>
+    <div id="debug-output" style="position: fixed; top: 50px; right: 10px; width: 300px; background: rgba(0,0,0,0.9); color: #0f0; font-family: monospace; font-size: 10px; padding: 10px; max-height: 400px; overflow-y: auto; z-index: 99999; display: none; border: 1px solid #0f0; border-radius: 4px; user-select: text; cursor: text;"></div>
+    <div id="band-controls" style="display: none;">
+      <span style="font-weight: 500; margin-right: 5px;">Bands:</span>
+      <div id="settings-menu">
+        <button id="settings-button">⚙️ Settings</button>
+        <div id="settings-dropdown">
+          <div class="settings-item">
+            <label for="debug-toggle">Debug Mode:</label>
+            <input type="checkbox" id="debug-toggle">
+          </div>
+          <div class="settings-item">
+            <label for="dark-mode-toggle">Dark Mode:</label>
+            <input type="checkbox" id="dark-mode-toggle">
+          </div>
+          <div class="settings-item">
+            <label for="layout-toggle">Side-by-Side:</label>
+            <input type="checkbox" id="layout-toggle">
+          </div>
+          <div class="settings-item">
+            <label for="stream-csv-toggle">Stream CSV:</label>
+            <input type="checkbox" id="stream-csv-toggle">
+          </div>
+          <div class="settings-item">
+            <label for="refresh-interval">Refresh (s):</label>
+            <input type="number" id="refresh-interval" min="0.1" max="10" step="0.1" value="0.3">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="charts" class="stacked">
+      <div class="chart-container" id="container24" style="display: none;"><div class="chart" id="chart24"></div></div>
+      <div class="chart-container" id="container5" style="display: none;"><div class="chart" id="chart5"></div></div>
+      <div class="chart-container" id="container6" style="display: none;"><div class="chart" id="chart6"></div></div>
     </div>
     <script type="module">
       import ApexCharts from "apexcharts";
@@ -87,107 +271,377 @@
 
       let rawSeriesData = {};
       let lastZoom = {};
+      let darkMode = false;
+      let currentLayout = "stacked";
+      let enabledBands = { "24": false, "5": false, "6": false };
+      let supportedBands = { "24": false, "5": false, "6": false };
+      let debugEnabled = false;
+      
+      // Custom drag-to-zoom state
+      let dragState = {
+        isDragging: false,
+        startX: 0,
+        chartId: null,
+        overlay: null
+      };
+
+      // Debug logger
+      function debugLog(msg) {
+        if (!debugEnabled) return;
+        const debugDiv = document.getElementById('debug-output');
+        if (debugDiv) {
+          debugDiv.style.display = 'block';
+          const time = new Date().toLocaleTimeString();
+          debugDiv.innerHTML += `[${time}] ${msg}<br>`;
+          debugDiv.scrollTop = debugDiv.scrollHeight;
+        }
+        console.log(msg);
+      }
+
+      window.setDebugMode = (enabled) => {
+        debugEnabled = enabled;
+        const debugDiv = document.getElementById('debug-output');
+        const debugToggle = document.getElementById('debug-toggle');
+        if (debugDiv && !enabled) {
+          debugDiv.style.display = 'none';
+        }
+        if (debugToggle) {
+          debugToggle.checked = enabled;
+        }
+      };
+
+      window.setRefreshInterval = (interval) => {
+        const refreshInput = document.getElementById('refresh-interval');
+        if (refreshInput) {
+          refreshInput.value = interval;
+        }
+      };
+
+      // Settings menu functionality
+      document.addEventListener('DOMContentLoaded', () => {
+        const settingsButton = document.getElementById('settings-button');
+        const settingsDropdown = document.getElementById('settings-dropdown');
+        const debugToggle = document.getElementById('debug-toggle');
+        const refreshInterval = document.getElementById('refresh-interval');
+
+        // Toggle dropdown
+        settingsButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          settingsDropdown.classList.toggle('open');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+          settingsDropdown.classList.remove('open');
+        });
+
+        // Prevent dropdown from closing when clicking inside
+        settingsDropdown.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+
+        // Debug toggle
+        debugToggle.addEventListener('change', (e) => {
+          const enabled = e.target.checked;
+          debugEnabled = enabled;
+          const debugDiv = document.getElementById('debug-output');
+          if (debugDiv) {
+            debugDiv.style.display = enabled ? 'block' : 'none';
+          }
+          if (window.pywebview) {
+            window.pywebview.api.save_config('debug', enabled);
+          }
+          debugLog(`Debug mode ${enabled ? 'enabled' : 'disabled'}`);
+        });
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        darkModeToggle.addEventListener('change', (e) => {
+          toggleDarkMode();
+        });
+
+        // Layout toggle
+        const layoutToggle = document.getElementById('layout-toggle');
+        layoutToggle.addEventListener('change', (e) => {
+          toggleLayout();
+        });
+
+        // Stream CSV toggle
+        const streamCsvToggle = document.getElementById('stream-csv-toggle');
+        streamCsvToggle.addEventListener('change', (e) => {
+          const enabled = e.target.checked;
+          if (window.pywebview) {
+            window.pywebview.api.toggle_csv_stream(enabled);
+          }
+          debugLog(`CSV streaming ${enabled ? 'enabled' : 'disabled'}`);
+        });
+
+        // Refresh interval
+        refreshInterval.addEventListener('change', (e) => {
+          const value = parseFloat(e.target.value);
+          if (value >= 0.1 && value <= 10) {
+            if (window.pywebview) {
+              window.pywebview.api.save_config('update_interval_s', value);
+            }
+            debugLog(`Refresh interval changed to ${value}s`);
+          }
+        });
+      });
+
+      function getChartTheme() {
+        return darkMode
+          ? {
+              mode: "dark",
+              palette: "palette1",
+            }
+          : {
+              mode: "light",
+              palette: "palette1",
+            };
+      }
+
+      function toggleDarkMode() {
+        darkMode = !darkMode;
+        document.body.classList.toggle("dark-mode", darkMode);
+        debugLog(`Dark mode ${darkMode ? 'enabled' : 'disabled'}`);
+        
+        // Save to config
+        const mode = darkMode ? "dark" : "light";
+        if (window.pywebview) {
+          window.pywebview.api.save_config("dark_mode", mode);
+        }
+        
+        // Update all charts
+        ["24", "5", "6"].forEach((bandId) => {
+          if (window[`chart${bandId}`]) {
+            window[`chart${bandId}`].updateOptions({
+              theme: getChartTheme(),
+            });
+          }
+        });
+      }
+
+      function toggleLayout() {
+        currentLayout = currentLayout === "stacked" ? "side-by-side" : "stacked";
+        const chartsEl = document.getElementById("charts");
+        chartsEl.className = currentLayout;
+        debugLog(`Layout changed to ${currentLayout}`);
+        
+        // Save to config
+        if (window.pywebview) {
+          window.pywebview.api.save_config("layout", currentLayout);
+        }
+        
+        // Trigger chart resize
+        ["24", "5", "6"].forEach((bandId) => {
+          if (window[`chart${bandId}`]) {
+            window[`chart${bandId}`].updateOptions({});
+          }
+        });
+      }
+
+      // Create persistent band controls
+      function createBandControls() {
+        const controlsDiv = document.getElementById("band-controls");
+        
+        ["24", "5", "6"].forEach((id) => {
+          if (supportedBands[id]) {
+            const label = document.createElement("label");
+            
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.id = `band-toggle-${id}`;
+            checkbox.checked = enabledBands[id];
+            
+            const text = document.createElement("span");
+            text.textContent = id === "24" ? "2.4 GHz" : id === "5" ? "5 GHz" : "6 GHz";
+            
+            checkbox.onchange = () => {
+              const checkedCount = ["24", "5", "6"].filter(bid => 
+                supportedBands[bid] && document.getElementById(`band-toggle-${bid}`)?.checked
+              ).length;
+              
+              if (checkedCount === 0) {
+                checkbox.checked = true;
+                return;
+              }
+              
+              enabledBands[id] = checkbox.checked;
+              
+              // Save to config and reload
+              if (window.pywebview) {
+                const key = id === "24" ? "show_24ghz" : id === "5" ? "show_5ghz" : "show_6ghz";
+                window.pywebview.api.save_config(key, checkbox.checked).then(() => {
+                  window.location.reload();
+                });
+              }
+            };
+            
+            label.appendChild(checkbox);
+            label.appendChild(text);
+            controlsDiv.appendChild(label);
+          }
+        });
+        
+        // Add divider before settings menu
+        const divider = document.createElement("span");
+        divider.style.color = "#ccc";
+        divider.style.margin = "0 5px";
+        divider.textContent = "|";
+        controlsDiv.appendChild(divider);
+        
+        // Move settings menu to the end
+        const settingsMenu = document.getElementById("settings-menu");
+        if (settingsMenu) {
+          controlsDiv.appendChild(settingsMenu);
+        }
+        
+        // Show controls if any band is supported
+        if (supportedBands["24"] || supportedBands["5"] || supportedBands["6"]) {
+          controlsDiv.style.display = "flex";
+        }
+      }
+
+      // Remove old menu customization function
+      function customizeDownloadMenu(chart, bandId) {
+        debugLog(`Setting up download menu customization for band ${bandId}`);
+        
+        const addIconsToMenu = () => {
+          const menuItems = document.querySelectorAll('.apexcharts-menu-item');
+          if (menuItems.length === 0) return;
+          
+          let iconsAdded = 0;
+          menuItems.forEach(item => {
+            if (item.querySelector('svg')) return; // Already has icon
+            
+            // Add left alignment style
+            item.style.textAlign = 'left';
+            item.style.display = 'flex';
+            item.style.alignItems = 'center';
+            item.style.whiteSpace = 'nowrap';
+            
+            const text = item.textContent.trim();
+            let icon = '';
+            
+            if (text.includes('PNG')) {
+              icon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="margin-right: 8px; flex-shrink: 0;"><path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1 11v5h-2v-5H9l4-4l4 4z"/></svg>';
+            } else if (text.includes('SVG')) {
+              icon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="margin-right: 8px; flex-shrink: 0;"><path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1 11v5h-2v-5H9l4-4l4 4z"/></svg>';
+            } else if (text.includes('CSV')) {
+              icon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="margin-right: 8px; flex-shrink: 0;"><path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm1 10h-4v1h4v1h-4v1h4v1h-5v-6h5zm-6 0H6v4h3v-1H7v-1h2v-1H7v-1h2z"/></svg>';
+            }
+            
+            if (icon) {
+              item.innerHTML = icon + item.innerHTML;
+              iconsAdded++;
+            }
+          });
+          
+          if (iconsAdded > 0) {
+            debugLog(`Added ${iconsAdded} file icons to download menu`);
+          }
+        };
+        
+        // Watch for menu being added to DOM
+        const observer = new MutationObserver((mutations) => {
+          for (const mutation of mutations) {
+            for (const node of mutation.addedNodes) {
+              if (node.nodeType === 1 && (node.classList?.contains('apexcharts-menu') || node.querySelector?.('.apexcharts-menu'))) {
+                addIconsToMenu();
+                break;
+              }
+            }
+          }
+        });
+        
+        observer.observe(document.body, { childList: true, subtree: true });
+      }
+
+      window.setDarkMode = (mode) => {
+        if (mode === "dark") {
+          darkMode = true;
+        } else if (mode === "light") {
+          darkMode = false;
+        } else {
+          // auto - use system preference
+          darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        }
+        document.body.classList.toggle("dark-mode", darkMode);
+        
+        // Update checkbox
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        if (darkModeToggle) {
+          darkModeToggle.checked = darkMode;
+        }
+      };
+
+      window.setLayout = (layout) => {
+        currentLayout = layout;
+        document.getElementById("charts").className = layout;
+        
+        // Update checkbox
+        const layoutToggle = document.getElementById('layout-toggle');
+        if (layoutToggle) {
+          layoutToggle.checked = (layout === 'side-by-side');
+        }
+      };
 
       function makeOptions(bandId, bandName, channels) {
+        debugLog('Creating chart for ' + bandName);
         const options = {
           series: [],
+          theme: getChartTheme(),
           chart: {
             type: "area",
             redrawOnParentResize: true,
             height: "auto",
             width: "100%",
             zoom: {
-              enabled: true,
-              allowMouseWheelZoom: false,
-              // autoScaleYaxis: false,
+              enabled: false,
+            },
+            pan: {
+              enabled: false,
             },
             animations: {
               enabled: false,
             },
             events: {
-              beforeResetZoom: (chart) => {
-                lastZoom[bandName] = undefined;
-                // chart.w.globals.lastXAxis.min = undefined;
-                // chart.w.globals.lastXAxis.max = undefined;
-                return true;
-              },
-              beforeZoom: (chart, { xaxis, yaxis }) => {
-                let newXaxis = { ...xaxis };
-                const minRange = 2;
-                if (xaxis.max - xaxis.min < minRange) {
-                  const mid = (xaxis.min + xaxis.max) / 2;
-                  // desired +/-1 around midpoint to produce a minimum range of 2
-                  const desiredMin = mid - 1;
-                  const desiredMax = mid + 1;
-                  let min = Math.max(channels[0], desiredMin);
-                  let max = Math.min(channels[channels.length - 1], desiredMax);
-                  // If clamping reduced the range below 2, try to expand the other side(s)
-                  if (max - min < minRange) {
-                    const deficit = minRange - (max - min);
-                    // Prefer expanding lower bound first
-                    min = Math.max(channels[0], min - deficit);
-                    // If still not enough, expand the upper bound
-                    if (max - min < minRange) {
-                      const remaining = minRange - (max - min);
-                      max = Math.min(
-                        channels[channels.length - 1],
-                        max + remaining,
-                      );
-                    }
-                  }
-                  newXaxis = { min, max };
-                }
-                return { xaxis: newXaxis, yaxis };
-              },
-              zoomed: (_chart, { xaxis, yaxis }) => {
-                lastZoom[bandName] = [xaxis.min, xaxis.max];
-                return true;
+              selection: (chart, { xaxis, yaxis }) => {
+                debugLog('selection: ' + xaxis.min + ' to ' + xaxis.max);
               },
               updated: (chart, options) => {
-                if (
-                  lastZoom[bandName] &&
-                  (options.config.xaxis.min !== lastZoom[bandName][0] ||
-                    options.config.xaxis.max !== lastZoom[bandName][1])
-                ) {
-                  // chart.updateOptions({
-                  //   chart: {
-                  //     animations: { dynamicAnimations: { enabled: false } },
-                  //   },
-                  // });
-                  chart.zoomX(lastZoom[bandName][0], lastZoom[bandName][1]);
-                  // chart.updateOptions({
-                  //   chart: {
-                  //     animations: { dynamicAnimations: { enabled: true } },
-                  //   },
-                  // });
-                }
+                // No longer needed
               },
             },
             toolbar: {
               tools: {
-                // zoom: true,
                 pan: false,
+                zoom: false,
                 zoomin: false,
                 zoomout: false,
-                reset:
-                  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 16v-2.5q0-.625.438-1.062T13.5 12H16v1.5h-2.5V16zm1.5 6q-.625 0-1.062-.437T12 20.5V18h1.5v2.5H16V22zm7-6v-2.5H18V12h2.5q.625 0 1.063.438T22 13.5V16zM18 22v-1.5h2.5V18H22v2.5q0 .625-.437 1.063T20.5 22zm2.775-12H18.7q-.65-2.2-2.475-3.6T12 5Q9.075 5 7.037 7.038T5 12q0 1.8.813 3.3T8 17.75V15h2v6H4v-2h2.35Q4.8 17.75 3.9 15.938T3 12q0-1.875.713-3.512t1.924-2.85t2.85-1.925T12 3q3.225 0 5.663 1.988T20.775 10"/></svg>',
+                reset: false,
+                selection: false,
+                download: true,
                 customIcons: [
                   {
                     icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M20 8V6h-2q-.425 0-.712-.288T17 5t.288-.712T18 4h2q.825 0 1.413.588T22 6v2q0 .425-.288.713T21 9t-.712-.288T20 8M2 8V6q0-.825.588-1.412T4 4h2q.425 0 .713.288T7 5t-.288.713T6 6H4v2q0 .425-.288.713T3 9t-.712-.288T2 8m18 12h-2q-.425 0-.712-.288T17 19t.288-.712T18 18h2v-2q0-.425.288-.712T21 15t.713.288T22 16v2q0 .825-.587 1.413T20 20M4 20q-.825 0-1.412-.587T2 18v-2q0-.425.288-.712T3 15t.713.288T4 16v2h2q.425 0 .713.288T7 19t-.288.713T6 20zm2-6v-4q0-.825.588-1.412T8 8h8q.825 0 1.413.588T18 10v4q0 .825-.587 1.413T16 16H8q-.825 0-1.412-.587T6 14m2 0h8v-4H8zm0 0v-4z"/></svg>',
-                    index: 2,
+                    index: -1,
                     title: "Toggle Expand",
                     click: (chart, options, e) => {
                       const chartEl = chart.el;
+                      const bandControls = document.getElementById('band-controls');
                       if (
                         chartEl.parentElement.classList.contains("full-window")
                       ) {
                         options.config.chart.height = "auto";
                         chartEl.parentElement.classList.remove("full-window");
                         document.body.classList.remove("noscroll");
+                        if (bandControls) bandControls.style.display = "flex";
                       } else {
                         options.config.chart.height = "100%";
                         chartEl.parentElement.classList.add("full-window");
                         document.body.classList.add("noscroll");
+                        if (bandControls) bandControls.style.display = "none";
                       }
                     },
                   },
@@ -198,6 +652,7 @@
                   filename: "export",
                   headerCategory: "channel",
                   headerValue: "rssi",
+                  columnDelimiter: ',',
                 },
                 svg: {
                   filename: "export",
@@ -220,6 +675,11 @@
           legend: {
             showForSingleSeries: true,
             position: "left",
+            markers: {
+              width: 12,
+              height: 12,
+              offsetX: -5,
+            },
             onItemClick: {
               toggleDataSeries: false,
             },
@@ -241,18 +701,26 @@
             },
           },
           xaxis: {
-            type: "category",
-            categories: channels,
+            type: "numeric",
             min: channels[0],
             max: channels[channels.length - 1],
+            range: channels[channels.length - 1] - channels[0],
             tickAmount: Math.min(channels.length - 1, 15),
-            tickPlacement: "on",
+            forceNiceScale: false,
+            decimalsInFloat: 0,
             labels: {
               rotate: false,
               hideOverlappingLabels: true,
+              formatter: (val) => Math.round(val),
             },
             title: {
               text: "channel",
+            },
+            axisBorder: {
+              show: true
+            },
+            axisTicks: {
+              show: true
             },
             tooltip: {
               enabled: false,
@@ -342,11 +810,20 @@
       }
 
       window.init = (bands) => {
-        const chart24 = window.chart24;
-        const chart5 = window.chart5;
-        const chart6 = window.chart6;
+        enabledBands = bands;
+        
+        // Use window.supportedBands if set by Python, otherwise use bands
+        if (window.supportedBands) {
+          supportedBands = window.supportedBands;
+        } else {
+          supportedBands = bands;
+        }
+        
+        // Create band controls after init
+        createBandControls();
 
         if (bands["24"]) {
+          document.getElementById("container24").style.display = "block";
           const options24 = makeOptions(
             "24",
             "2.4GHz",
@@ -357,10 +834,11 @@
             options24,
           );
           window.chart24 = chart24;
-          chart24.render();
+          chart24.render().then(() => customizeDownloadMenu(chart24, "24"));
         }
 
         if (bands["5"]) {
+          document.getElementById("container5").style.display = "block";
           const options5 = makeOptions(
             "5",
             "5GHz",
@@ -371,10 +849,11 @@
             options5,
           );
           window.chart5 = chart5;
-          chart5.render();
+          chart5.render().then(() => customizeDownloadMenu(chart5, "5"));
         }
 
         if (bands["6"]) {
+          document.getElementById("container6").style.display = "block";
           const options6 = makeOptions(
             "6",
             "6GHz",
@@ -385,16 +864,46 @@
             options6,
           );
           window.chart6 = chart6;
-          chart6.render();
+          chart6.render().then(() => customizeDownloadMenu(chart6, "6"));
         }
       };
 
       window.updateChart = (bandId, series) => {
         if (window[`chart${bandId}`]) {
           rawSeriesData[bandId] = series;
+          
+          // Don't update if menu is open
+          const menu = document.querySelector('.apexcharts-menu-open');
+          if (menu) {
+            debugLog('Skipping chart update - menu is open');
+            return;
+          }
+          
           try {
-            window[`chart${bandId}`].updateSeries(series);
+            const chart = window[`chart${bandId}`];
+            
+            // Safety check
+            if (!chart.w || !chart.w.config || !chart.w.config.xaxis) {
+              debugLog(`Chart ${bandId} not fully initialized, skipping update`);
+              return;
+            }
+            
+            // Get the original axis bounds
+            const minChannel = chart.w.config.xaxis.min;
+            const maxChannel = chart.w.config.xaxis.max;
+            
+            debugLog(`Updating chart ${bandId} (channels ${minChannel}-${maxChannel})`);
+            
+            // Update with explicit axis bounds
+            chart.updateOptions({
+              series: series,
+              xaxis: {
+                min: minChannel,
+                max: maxChannel
+              }
+            }, false, true);
           } catch (e) {
+            debugLog('Error updating chart: ' + e.message);
             console.error("Failed to update series", e);
           }
         }
