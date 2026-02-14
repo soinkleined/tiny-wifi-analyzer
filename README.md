@@ -6,10 +6,14 @@ Made with PyObjC, pywebview, ApexCharts, and PyInstaller.
 Forked from [nolze/tiny-wifi-analyzer](https://github.com/nolze/tiny-wifi-analyzer)
 
 ### Light Mode
-![Tiny Wi-Fi Analyzer - Light Mode](img/twa_light.png)
+<p align="center">
+  <img src="img/twa_light.png" alt="Tiny Wi-Fi Analyzer - Light Mode" width="800">
+</p>
 
 ### Dark Mode
-![Tiny Wi-Fi Analyzer - Dark Mode](img/twa_dark.png)
+<p align="center">
+  <img src="img/twa_dark.png" alt="Tiny Wi-Fi Analyzer - Dark Mode" width="800">
+</p>
 
 ## Features
 
@@ -43,7 +47,9 @@ Because the application is not code-signed, you will need to follow these steps 
 2. Select "Open" from the context menu
 3. Click "Open" in the security dialog
 
-<img src="https://user-images.githubusercontent.com/291323/179491872-3a9e6c4c-b8cb-4081-ac88-bd1817d6ba4d.png" width="300px" />
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/291323/179491872-3a9e6c4c-b8cb-4081-ac88-bd1817d6ba4d.png" alt="macOS Security Dialog" width="300">
+</p>
 
 ### Location Services Permission (macOS 14+)
 
@@ -51,11 +57,15 @@ On macOS 14 Sonoma and later, you must grant Location Services permission for th
 
 1. **Grant permission on first launch** - The app will display this prompt:
 
-   ![Location Services Permission Prompt](img/use_location_services_prompt.png)
+   <p align="center">
+     <img src="img/use_location_services_prompt.png" alt="Location Services Permission Prompt" width="400">
+   </p>
 
 2. **Enable manually if needed** - Go to **System Settings > Privacy & Security > Location Services**, find "Tiny Wi-Fi Analyzer" and enable it:
 
-   ![Location Services Settings Toggle](img/use_location_services_toggle.png)
+   <p align="center">
+     <img src="img/use_location_services_toggle.png" alt="Location Services Settings Toggle" width="600">
+   </p>
 
 3. **Restart the app** after granting permission
 
