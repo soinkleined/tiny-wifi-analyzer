@@ -1,9 +1,17 @@
+<p align="center">
+  <img src="packaging/assets/wifi-icon.svg" alt="Tiny Wi-Fi Analyzer Logo" width="128">
+</p>
+
 # Tiny Wi-Fi Analyzer
 
-Simple, open-source Wi-Fi channel and strength analyzer for macOS.
-Made with PyObjC, pywebview, ApexCharts, and PyInstaller.
+<p align="center">
+  Simple, open-source Wi-Fi channel and strength analyzer for macOS.<br>
+  Made with PyObjC, pywebview, ApexCharts, and PyInstaller.
+</p>
 
-Forked from [nolze/tiny-wifi-analyzer](https://github.com/nolze/tiny-wifi-analyzer)
+<p align="center">
+  Forked from <a href="https://github.com/nolze/tiny-wifi-analyzer">nolze/tiny-wifi-analyzer</a>
+</p>
 
 ### Light Mode
 <p align="center">
