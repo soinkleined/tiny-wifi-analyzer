@@ -1,8 +1,5 @@
 # Tiny Wi-Fi Analyzer
 
-[![CD](https://github.com/soinkleined/tiny-wifi-analyzer/workflows/CD/badge.svg)](https://github.com/soinkleined/tiny-wifi-analyzer/actions?query=workflow%3ACD)
-<a href="https://www.buymeacoffee.com/nolze" title="Donate to this project using Buy Me A Coffee"><img src="https://img.shields.io/badge/Buy%20Me%20A%20Coffee-donate-orange.svg" alt="Buy Me A Coffee donate button" /></a>
-
 Simple, open-source Wi-Fi channel and strength analyzer for macOS.
 Made with PyObjC, pywebview, ApexCharts, and PyInstaller.
 
