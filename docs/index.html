@@ -9,39 +9,60 @@
       rel="stylesheet"
     />
     <script>
-      // Dark mode detection and toggle
+      // Dark mode detection
       if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark')
       } else {
         document.documentElement.classList.remove('dark')
       }
+      
+      // Toggle function
+      function toggleTheme() {
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark')
+          localStorage.theme = 'light'
+        } else {
+          document.documentElement.classList.add('dark')
+          localStorage.theme = 'dark'
+        }
+      }
     </script>
   </head>
 
   <body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans antialiased transition-colors duration-300">
-    <div
-      class="min-h-screen flex flex-col justify-center items-center px-8 md:px-16 py-16"
+    <!-- Theme Toggle Button -->
+    <button
+      onclick="toggleTheme()"
+      class="fixed top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
+      aria-label="Toggle theme"
     >
+      <svg class="w-6 h-6 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+      </svg>
+      <svg class="w-6 h-6 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+    
+    <div class="min-h-screen flex flex-col justify-center items-center px-4 md:px-16 py-8 md:py-16">
       <!-- Main Content -->
-      <div
-        class="max-w-6xl flex flex-wrap md:flex-nowrap items-center space-x-0 md:space-x-12"
-      >
+      <div class="max-w-6xl w-full flex flex-col md:flex-row items-center gap-8 md:gap-12">
         <!-- Text Content -->
-        <div class="w-full md:w-1/2 mb-8 md:mb-4 flex flex-col items-center">
+        <div class="w-full md:w-1/2 flex flex-col items-center text-center">
           <img src="./assets/twa.svg" width="80" height="80" class="pb-6" />
-          <h1 class="text-4xl font-semibold mb-4">Tiny Wi-Fi Analyzer</h1>
-          <h2 class="text-2xl font-light mb-8 text-center">
+          <h1 class="text-3xl md:text-4xl font-semibold mb-4">Tiny Wi-Fi Analyzer</h1>
+          <h2 class="text-lg md:text-2xl font-light mb-8">
             Simple, open-source Wi-Fi channel and strength analyzer for macOS.
           </h2>
-          <div class="flex space-x-4">
+          <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <a
               href="https://github.com/soinkleined/tiny-wifi-analyzer/releases/latest"
-              class="bg-blue-700 text-white font-bold px-5 py-2 rounded-full hover:bg-blue-600 transition-all duration-300"
+              class="bg-blue-700 text-white font-bold px-5 py-2 rounded-full hover:bg-blue-600 transition-all duration-300 text-center"
               >Download Now</a
             >
             <a
               href="https://github.com/soinkleined/tiny-wifi-analyzer"
-              class="bg-gray-600 text-white font-bold px-5 py-2 rounded-full hover:bg-gray-500 transition-all duration-300"
+              class="bg-gray-600 text-white font-bold px-5 py-2 rounded-full hover:bg-gray-500 transition-all duration-300 text-center"
               >GitHub</a
             >
           </div>
@@ -51,24 +72,22 @@
         </div>
 
         <!-- Image -->
-        <div class="flex-shrink-0 w-full md:w-1/2">
+        <div class="w-full md:w-1/2">
           <img
             src="./assets/screenshot.png"
             alt="App screenshot"
-            class="rounded-lg dark:hidden"
+            class="rounded-lg dark:hidden w-full"
           />
           <img
             src="./assets/screenshot-dark.png"
             alt="App screenshot"
-            class="rounded-lg hidden dark:block"
+            class="rounded-lg hidden dark:block w-full"
           />
         </div>
       </div>
 
       <!-- Footer -->
-      <div
-        class="absolute bottom-0 left-0 right-0 pt-4 pb-6 flex justify-center items-center"
-      >
+      <div class="mt-12 pt-4 pb-6 text-center">
         <p class="text-sm text-gray-500 dark:text-gray-400">
           &copy; 2020 nolze &bull; 2026 David Klein (soinkleined)
         </p>
