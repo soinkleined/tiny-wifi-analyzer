@@ -50,7 +50,7 @@ exe = EXE(
 app = BUNDLE(
     exe,
     name="Tiny Wi-Fi Analyzer.app",
-    icon="./assets/twa.icns",
+    icon="packaging/assets/twa.icns",
     bundle_identifier="com.github.soinkleined.tiny-wifi-analyzer",
     info_plist={
         "NSPrincipalClass": "NSApplication",
