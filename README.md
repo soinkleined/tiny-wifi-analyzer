@@ -55,7 +55,6 @@ Because the application is not code-signed, you will need to follow these steps 
 
    <p align="center">
      <img src="img/not_opened_warning.png" alt="Cannot Open Warning" width="300">
-     <img src="img/no_opened_warning2.png" alt="Cannot Open Warning Alternative" width="300">
    </p>
 
 2. **Open System Settings** - Go to **System Settings > Privacy & Security** and scroll down to find the security warning:
