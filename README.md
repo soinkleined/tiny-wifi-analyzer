@@ -51,13 +51,29 @@
 
 Because the application is not code-signed, you will need to follow these steps to run it:
 
-1. **Right-click on the app icon**
-2. Select "Open" from the context menu
-3. Click "Open" in the security dialog
+1. **Double-click the app** - You'll see a warning that the app cannot be opened:
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/291323/179491872-3a9e6c4c-b8cb-4081-ac88-bd1817d6ba4d.png" alt="macOS Security Dialog" width="300">
-</p>
+   <p align="center">
+     <img src="img/not_opened_warning.png" alt="Cannot Open Warning" width="300">
+   </p>
+
+2. **Open System Settings** - Go to **System Settings > Privacy & Security** and scroll down to find the security warning:
+
+   <p align="center">
+     <img src="img/open_anyway_preferences.png" alt="Open Anyway in System Settings" width="600">
+   </p>
+
+3. **Click "Open Anyway"** and enter your password if prompted:
+
+   <p align="center">
+     <img src="img/privacy_security_password.png" alt="Enter Password" width="400">
+   </p>
+
+4. **Confirm** - Click "Open" in the final confirmation dialog:
+
+   <p align="center">
+     <img src="img/open_anyway.png" alt="Final Confirmation" width="300">
+   </p>
 
 ### Location Services Permission (macOS 14+)
 
