@@ -1,5 +1,5 @@
 spec:
-	poetry run pyi-makespec tiny_wifi_analyzer/__main__.py \
+	uv run pyi-makespec tiny_wifi_analyzer/__main__.py \
 		--name 'Tiny Wi-Fi Analyzer' \
 		--osx-bundle-identifier 'io.github.nolze.tiny-wifi-analyzer' \
 		--target-architecture universal2 \
@@ -9,7 +9,7 @@ spec:
 
 build:
 	pnpm run build
-	poetry run pyinstaller 'Tiny Wi-Fi Analyzer.spec' \
+	uv run pyinstaller 'Tiny Wi-Fi Analyzer.spec' \
 		--distpath build/dist \
 		--noconfirm \
 		--clean

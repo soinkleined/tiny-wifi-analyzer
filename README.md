@@ -99,11 +99,11 @@ On macOS 14 Sonoma and later, you must grant Location Services permission for th
 ```sh
 git clone https://github.com/soinkleined/tiny-wifi-analyzer
 cd tiny-wifi-analyzer
-poetry install
+uv sync --all-extras
 pnpm install
 
 # Run in development mode
-poetry run python -m tiny_wifi_analyzer
+uv run python -m tiny_wifi_analyzer
 
 # Frontend development
 pnpm run watch # or pnpm run build

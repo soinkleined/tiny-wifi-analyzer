@@ -10,10 +10,10 @@ cd "$(dirname "$0")/.."
 echo "Building frontend..."
 pnpm run build
 
-# Install PyInstaller if not already installed
-if ! command -v pyinstaller &> /dev/null; then
-    echo "Installing PyInstaller..."
-    poetry add --group dev pyinstaller
+# Install dependencies if not already installed
+if [ ! -d ".venv" ]; then
+    echo "Installing dependencies..."
+    uv sync --all-extras
 fi
 
 # Clean previous builds
@@ -22,7 +22,7 @@ rm -rf packaging/build packaging/dist
 
 # Build the app
 echo "Building macOS app bundle..."
-poetry run pyinstaller packaging/build_mac.spec --distpath packaging/dist --workpath packaging/build
+uv run pyinstaller packaging/build_mac.spec --distpath packaging/dist --workpath packaging/build
 
 echo ""
 echo "Build complete!"

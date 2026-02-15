@@ -10,6 +10,6 @@
     "parcel": "^2.16.4"
   },
   "dependencies": {
-    "apexcharts": "^5.3.6"
+    "apexcharts": "^5.4.0"
   }
 }

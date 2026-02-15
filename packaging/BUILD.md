@@ -3,15 +3,15 @@
 ## Prerequisites
 
 - macOS 10.15 or later
-- Python 3.8+
-- Poetry
+- Python 3.10+
+- uv
 - pnpm
 
 ## Build Instructions
 
 1. Install dependencies:
 ```bash
-poetry install
+uv sync --all-extras
 pnpm install
 ```
 
@@ -36,6 +36,7 @@ hdiutil create -volname "Tiny Wi-Fi Analyzer" -srcfolder "packaging/dist/Tiny Wi
 
 ## Notes
 
-- The app is built for Apple Silicon (arm64) by default
+- The app is built for Apple Silicon (arm64) Macs
+- Intel Mac users can run it using Rosetta 2
 - Location Services permission is required for Wi-Fi scanning
 - The app is not code-signed, so users will need to right-click and select "Open" the first time

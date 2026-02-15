@@ -9,10 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # NOTE: https://github.com/actions/python-versions#building-installation-packages
-        # For Python >= 3.11, the official macOS universal2 Python binaries are simply downloaded from python.org and...
         python-version: ["3.12"]
-        poetry-version: ["2.0.1"]
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,16 +19,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Run image
-        uses: abatilo/actions-poetry@v2.4.0
-        with:
-          poetry-version: ${{ matrix.poetry-version }}
-      - name: Config
-        run: poetry config virtualenvs.create false --local
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
       - name: Install deps
-        run: poetry install
+        run: uv sync --all-extras
       - name: Set version
-        run: echo "APP_VERSION=$(poetry version --short)" >> $GITHUB_ENV
+        run: echo "APP_VERSION=$(grep '^version = ' pyproject.toml | cut -d'"' -f2)" >> $GITHUB_ENV
       - name: Install JS deps
         run: pnpm install
       - name: Build
