@@ -1,6 +1,6 @@
 [project]
 name = "tiny-wifi-analyzer"
-version = "0.7.1"
+version = "0.7.2"
 description = "A tiny Wi-Fi analyzer for macOS with enhanced features"
 authors = [
     {name = "David Klein", email = "david@soinkleined.com"},
