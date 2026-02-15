@@ -111,10 +111,10 @@ pnpm run watch # or pnpm run build
 
 ## Building for Distribution
 
-### macOS App Bundle (Apple Silicon)
+### macOS App Bundle (Universal Binary)
 
 ```sh
-# Build the app
+# Build the app (supports both Apple Silicon and Intel Macs)
 ./packaging/build_mac.sh
 
 # The app will be created at: packaging/dist/Tiny Wi-Fi Analyzer.app

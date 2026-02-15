@@ -36,7 +36,6 @@ hdiutil create -volname "Tiny Wi-Fi Analyzer" -srcfolder "packaging/dist/Tiny Wi
 
 ## Notes
 
-- The app is built for Apple Silicon (arm64) Macs
-- Intel Mac users can run it using Rosetta 2
+- The app is built as a universal binary (supports both Apple Silicon and Intel Macs natively)
 - Location Services permission is required for Wi-Fi scanning
 - The app is not code-signed, so users will need to right-click and select "Open" the first time
