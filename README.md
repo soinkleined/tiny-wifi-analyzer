@@ -10,6 +10,8 @@
 </p>
 
 <p align="center">
+  <a href="https://soinkleined.github.io/tiny-wifi-analyzer/">Website</a> •
+  <a href="https://github.com/soinkleined/tiny-wifi-analyzer/releases/latest">Download</a> •
   Forked from <a href="https://github.com/nolze/tiny-wifi-analyzer">nolze/tiny-wifi-analyzer</a>
 </p>
 
