@@ -335,11 +335,11 @@ def main() -> None:
     if getattr(sys, 'frozen', False):
         # Running in PyInstaller bundle
         base_path = sys._MEIPASS
+        index_html = os.path.join(base_path, "view/index.html")
     else:
         # Running in development
         base_path = os.path.dirname(__file__)
-    
-    index_html = os.path.join(base_path, "tiny_wifi_analyzer/view/index.html")
+        index_html = os.path.join(base_path, "view/index.html")
     
     # Ensure valid window size
     width = max(800, config.window_width)
