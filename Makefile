@@ -9,7 +9,7 @@ spec:
 
 build:
 	pnpm run build
-	uv run pyinstaller 'Tiny Wi-Fi Analyzer.spec' \
+	uv run pyinstaller packaging/build_mac.spec \
 		--distpath build/dist \
 		--noconfirm \
 		--clean

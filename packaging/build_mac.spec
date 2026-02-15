@@ -1,24 +1,20 @@
 # -*- mode: python ; coding: utf-8 -*-
-import os
+
+import re
+
+with open("pyproject.toml", "r") as f:
+    content = f.read()
+
+VERSION = re.search(r'^version\s*=\s*"(.*?)"', content, re.MULTILINE).group(1)
 
 block_cipher = None
 
 a = Analysis(
-    ['../tiny_wifi_analyzer/__main__.py'],
+    ["tiny_wifi_analyzer/__main__.py"],
     pathex=[],
     binaries=[],
-    datas=[
-        ('../tiny_wifi_analyzer/view', 'tiny_wifi_analyzer/view'),
-    ],
-    hiddenimports=[
-        'webview',
-        'webview.platforms.cocoa',
-        'AppKit',
-        'CoreLocation',
-        'CoreWLAN',
-        'Foundation',
-        'objc',
-    ],
+    datas=[("tiny_wifi_analyzer/view", "view")],
+    hiddenimports=[],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -28,50 +24,40 @@ a = Analysis(
     cipher=block_cipher,
     noarchive=False,
 )
-
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 
 exe = EXE(
     pyz,
     a.scripts,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
     [],
-    exclude_binaries=True,
-    name='Tiny Wi-Fi Analyzer',
+    name="Tiny Wi-Fi Analyzer",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
+    upx_exclude=[],
+    runtime_tmpdir=None,
     console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
-    target_arch='arm64',
+    target_arch="universal2",
     codesign_identity=None,
     entitlements_file=None,
 )
-
-coll = COLLECT(
-    exe,
-    a.binaries,
-    a.zipfiles,
-    a.datas,
-    strip=False,
-    upx=True,
-    upx_exclude=[],
-    name='Tiny Wi-Fi Analyzer',
-)
-
 app = BUNDLE(
-    coll,
-    name='Tiny Wi-Fi Analyzer.app',
-    icon='assets/wifi-icon.icns',
-    bundle_identifier='com.github.soinkleined.tiny-wifi-analyzer',
-    version='0.7.0',
+    exe,
+    name="Tiny Wi-Fi Analyzer.app",
+    icon="packaging/assets/twa.icns",
+    bundle_identifier="com.github.soinkleined.tiny-wifi-analyzer",
     info_plist={
-        'NSHighResolutionCapable': 'True',
-        'LSMinimumSystemVersion': '10.15.0',
-        'NSLocationWhenInUseUsageDescription': 'Location Services permission is required on macOS 14 Sonoma and later to scan Wi-Fi networks and display SSIDs.',
-        'NSLocationUsageDescription': 'Location Services permission is required on macOS 14 Sonoma and later to scan Wi-Fi networks and display SSIDs.',
-        'NSLocationAlwaysAndWhenInUseUsageDescription': 'Location Services permission is required on macOS 14 Sonoma and later to scan Wi-Fi networks and display SSIDs.',
-        'LSApplicationCategoryType': 'public.app-category.utilities',
+        "NSPrincipalClass": "NSApplication",
+        "NSAppleScriptEnabled": False,
+        "CFBundleShortVersionString": VERSION,
+        "CFBundleVersion": VERSION,
+        "NSHighResolutionCapable": True,
+        "NSLocationWhenInUseUsageDescription": "On macOS 14 Sonoma and Later, Location Services permission is required to get Wi-Fi SSIDs.",
     },
 )
