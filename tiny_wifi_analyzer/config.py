@@ -1,11 +1,14 @@
+"""Configuration management for Tiny Wi-Fi Analyzer."""
 import json
 import os
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from typing import Optional
 
 
 @dataclass
 class Config:
+    """Application configuration with persistent storage."""
+
     scan_interval_ms: int = 3000
     update_interval_s: float = 0.3
     debug: bool = False
@@ -20,12 +23,26 @@ class Config:
 
     @classmethod
     def load(cls, path: Optional[str] = None) -> "Config":
+        """Load configuration from a JSON file.
+
+        Args:
+            path: Path to configuration file. If None or file doesn't exist,
+                  returns default configuration.
+
+        Returns:
+            Config instance with loaded or default values
+        """
         if path and os.path.exists(path):
-            with open(path, "r") as f:
+            with open(path, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 return cls(**data)
         return cls()
 
     def save(self, path: str) -> None:
-        with open(path, "w") as f:
+        """Save configuration to a JSON file.
+
+        Args:
+            path: Path to save configuration file
+        """
+        with open(path, "w", encoding="utf-8") as f:
             json.dump(asdict(self), f, indent=2)
