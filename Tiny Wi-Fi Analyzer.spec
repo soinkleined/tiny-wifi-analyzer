@@ -51,7 +51,7 @@ app = BUNDLE(
     exe,
     name="Tiny Wi-Fi Analyzer.app",
     icon="./assets/twa.icns",
-    bundle_identifier="io.github.nolze.tiny-wifi-analyzer",
+    bundle_identifier="com.github.soinkleined.tiny-wifi-analyzer",
     info_plist={
         "NSPrincipalClass": "NSApplication",
         "NSAppleScriptEnabled": False,
